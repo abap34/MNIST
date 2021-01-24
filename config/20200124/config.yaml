@@ -1,0 +1,42 @@
+wadb_project_id: MyTemplateTest
+data: 
+  path: data/preprocessed/basic_encode
+  target: 
+  
+model-type: SimpleMLPRegressor
+
+cv:
+  n_fold: 5
+  method: KFold
+  random_state: 2
+
+param: 
+  model:
+    units: [32, 64, 32]
+    loss: mean_squared_error
+    metrics: [] 
+    input_drop_rate: 0.1
+    drop_rate: 0.2
+    activation: relu
+
+  optimizer:
+    optimizer: sgd
+    optimizer_lr: 0.001
+    decay: 1e-6
+
+
+  reduce_lr:
+    factor: 0.5
+    patience: 10
+    min_lr: 0.001
+
+
+  early_stopping:
+    min_delta: 0.
+    patience: 10
+    mode: min
+    restore_best_weights: True
+
+  fit:
+    batch_size: 128
+    verbose: 1
